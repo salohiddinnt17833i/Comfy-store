@@ -54,7 +54,6 @@ function Details() {
           <li><Link to={'/products'}>Products</Link></li>
         </ul>
       </div>
-
       <div>
         {
           data?.id && <>
@@ -80,7 +79,6 @@ function Details() {
                         )
                       })
                     }
-
                   </div>
 
                 </div>

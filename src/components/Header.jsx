@@ -85,7 +85,7 @@ function Header() {
                 </svg>
               </label>
 
-              <Link to = '/cart'>
+              <Link to='/cart'>
                 <div
                   tabIndex={0}
                   role='button'
