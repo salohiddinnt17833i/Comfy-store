@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 function Cart() {
   const [allData, setAllData] = useState([]);
-  const [allPrice, setAllPrice] = useState(0); // Jami narx
+  const [allPrice, setAllPrice] = useState(0);
 
   useEffect(() => {
     const savedData = localStorage.getItem('saveData');
@@ -10,13 +10,12 @@ function Cart() {
       setAllData(JSON.parse(savedData));
     }
 
-    // Mahsulotlarni yuklangandan so'ng jami narxni hisoblash
     let totalPrice = 0;
     allData.forEach(item => {
       totalPrice += item.price / 100;
     });
     setAllPrice(totalPrice);
-  }, [allData]); // allData o'zgarganida jami narxni qayta hisoblash
+  }, [allData]);
 
   function handleRemove(id) {
     let copied = JSON.parse(JSON.stringify(allData));
@@ -26,7 +25,6 @@ function Cart() {
     setAllData(copied);
     localStorage.setItem('saveData', JSON.stringify(copied));
 
-    // Mahsulotni o'chirishdan so'ng jami narxni qayta hisoblash
     let totalPrice = 0;
     copied.forEach(item => {
       totalPrice += item.price / 100;
