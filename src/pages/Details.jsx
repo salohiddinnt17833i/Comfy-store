@@ -7,6 +7,7 @@ function Details() {
   const [data, setData] = useState(null)
   const [selectedColor, setSelectedColor] = useState('')
   const [count, setCount] = useState(1)
+  const [cartSave, setCartSave] = useState([])
 
   useEffect(() => {
     if (Number(params.id)) {
@@ -22,7 +23,28 @@ function Details() {
     } else {
       navigate('/')
     }
+    const savedData = localStorage.getItem('saveData')
+    if (savedData) {
+      setCartSave(JSON.parse(savedData))
+    }
   }, [])
+
+  function handleSave(data) {
+    const savedData = {
+      amount: count,
+      cartID: Date.now(),
+      company: data.company,
+      image: data.image,
+      price: data.price,
+      productColor: selectedColor,
+      productID: params.id,
+      title: data.title
+    }
+    console.log(savedData);
+    const newData = [...cartSave, savedData]
+    setCartSave(newData)
+    localStorage.setItem('saveData', JSON.stringify(newData))
+  }
 
   return (
     <div className="w-3/5 m-auto">
@@ -53,7 +75,7 @@ function Details() {
                         return (
                           <span style={{
                             backgroundColor: color,
-                            border: color == selectedColor ? '1px solid black' : 'none'
+                            border: color === selectedColor ? '1px solid black' : 'none'
                           }} className="w-5 h-5 rounded-full block cursor-pointer" onClick={() => setSelectedColor(color)}></span>
                         )
                       })
@@ -78,7 +100,7 @@ function Details() {
                     <option value="5">5</option>
                   </select>
                 </div>
-                <button className="btn btn-primary mt-8 mb-20 uppercase ">ADD TO BAG</button>
+                <button onClick={() => { handleSave(data.attributes) }} className="btn btn-primary mt-8 mb-20 uppercase ">ADD TO BAG</button>
               </div>
             </div>
           </>
