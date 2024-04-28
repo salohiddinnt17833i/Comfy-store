@@ -1,3 +1,4 @@
+import toast, { Toaster } from 'react-hot-toast';
 import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
@@ -9,6 +10,7 @@ function Details() {
   const [count, setCount] = useState(1)
   const [cartSave, setCartSave] = useState([])
 
+  const notify = () => toast('✔️ Item added to Cart')
   useEffect(() => {
     if (Number(params.id)) {
       fetch(`https://strapi-store-server.onrender.com/api/products/${params.id}`)
@@ -40,10 +42,10 @@ function Details() {
       productID: params.id,
       title: data.title
     }
-    console.log(savedData);
     const newData = [...cartSave, savedData]
     setCartSave(newData)
     localStorage.setItem('saveData', JSON.stringify(newData))
+    notify()
   }
 
   return (
@@ -99,6 +101,7 @@ function Details() {
                   </select>
                 </div>
                 <button onClick={() => { handleSave(data.attributes) }} className="btn btn-primary mt-8 mb-20 uppercase ">ADD TO BAG</button>
+                <Toaster />
               </div>
             </div>
           </>
