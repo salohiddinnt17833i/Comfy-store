@@ -59,6 +59,7 @@ function Cart() {
         </div>
 
         {allData.length > 0 && (
+
           <div className="card bg-primary-content mt-10 p-4 w-m-[325px]  h-[200px]">
             <div className="flex flex-col gap-3">
               <p className="flex justify-between text-xs border-b border-slate-500 pb-2 gap-10">

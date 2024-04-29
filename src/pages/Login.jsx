@@ -7,18 +7,9 @@ function Login() {
   const [password, setPassword] = useState('');
   const [btnDisabled, setBtnDisabled] = useState(false);
 
-  useEffect(() => {
-    const justLoggedIn = JSON.parse(localStorage.getItem("logged"));
-    if (!justLoggedIn) {
-      localStorage.setItem("logged", JSON.stringify(true));
-      window.location.reload();
-    }
-  }, []);
-
   function handleSave(e) {
     e.preventDefault();
     setBtnDisabled(true);
-
     const logInHome = JSON.parse(localStorage.getItem("user"));
     if (logInHome) {
       if (logInHome.email === email && logInHome.password === password) {

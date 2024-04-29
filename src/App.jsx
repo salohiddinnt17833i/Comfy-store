@@ -17,11 +17,17 @@ export const ThemeContext = createContext(null);
 function App() {
   const navigate = useNavigate();
   const [theme, setTheme] = useState('light');
+  const [log, setLog] = useState()
 
   useEffect(() => {
     if (localStorage.getItem('theme')) {
       setTheme(localStorage.getItem('theme'))
     }
+    const justLoggedIn = JSON.parse(localStorage.getItem("logged"));
+    if (!justLoggedIn) {
+      setLog(justLoggedIn)
+    }
+
   }, [])
 
   useEffect(() => {
@@ -36,14 +42,12 @@ function App() {
     if (!isAuthentication) {
       navigate(redirectTo);
     }
-
     return children;
   }
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <Routes>
-        {/* public  */}
         <Route
           path='/'
           element={
@@ -88,22 +92,20 @@ function App() {
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='*' element={<ErrorPage></ErrorPage>}></Route>
 
-        {/* protected */}
         <Route
           path='/checkout'
           element={
-            <ProtectedRoute isAuthentication={true}>
+            <ProtectedRoute isAuthentication={log}>
               <Layout>
                 <Checkout></Checkout>
               </Layout>
             </ProtectedRoute>
           }
         ></Route>
-
         <Route
           path='/orders'
           element={
-            <ProtectedRoute isAuthentication={true}>
+            <ProtectedRoute isAuthentication={log}>
               <Layout>
                 <Orders></Orders>
               </Layout>

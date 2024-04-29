@@ -11,7 +11,7 @@ function Details() {
   const [cartSave, setCartSave] = useState([])
 
   const notify = () => toast('✔️ Item added to Cart')
-  
+
   useEffect(() => {
     if (Number(params.id)) {
       fetch(`https://strapi-store-server.onrender.com/api/products/${params.id}`)

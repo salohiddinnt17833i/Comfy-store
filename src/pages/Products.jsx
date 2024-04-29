@@ -121,7 +121,7 @@ export function Products() {
 
       </div>
       <div className="flex items-center justify-between border-b-2 pb-6 mt-14">
-        <p>22 products</p>
+        <p>{data.length} products</p>
         <div className="flex text-2xl gap-2">
           <span onClick={() => { setGrid(true) }}
             className="cursor-pointer flex justify-center items-center"
