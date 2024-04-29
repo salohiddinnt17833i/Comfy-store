@@ -18,6 +18,9 @@ function Cart() {
     setAllData(updatedData);
     localStorage.setItem('saveData', JSON.stringify(updatedData));
     toast.error('❌ Item removed from cart');
+
+    let totalPrice = updatedData.reduce((total, item) => total + (item.price / 100), 0);
+    setAllPrice(totalPrice);
   }
 
   return (

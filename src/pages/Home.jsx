@@ -27,7 +27,7 @@ function Home() {
       .finally(
         setLoading(false)
       )
-  }, {})
+  }, [])
 
 
   return (
